@@ -9,11 +9,17 @@ The file spreadspoke_scores.csv contains NFL spread data through the 2022 season
 This file is fed into a Kubeflow Pipeline built in the notebook Kubeflow_Pipeline.ipynb. In order to fit into a CI/CD and Continous Training workflow on Google Cloud, this file will function best if uploaded as a Vertex AI Workbench Jupyter Notebook (documentation on how to do this is here: https://cloud.google.com/vertex-ai/docs/workbench/managed/migrate-to-instances). Within the file a Kubeflow pipeline is defined with some custom components and some based on Vertex AI's custom integrations for a Google-Cloud-hosted project. While the code includes a call to run the pipeline job, if you prefer you can simply run code through the compile cell and then run the cell moving the pipeline specifications to cloud storage. After this, merely uploading a csv will run a pipeline job automatically (provided you build the cloud function!). Please note, some variable values will need to be updated to fit your specifications (e.g. bucket names, regions) - these are defined near the top of the notebook, but a full readthrough of the code before running is recommended.
 
 Lastly, the Cloud_Function_Files folder contains the code that should be used with Google's Cloud Functions. In order to set up the cloud function for automatically updating your model follow these steps:
+
 Enable any necessary APIs in a Google Cloud Project 
+
 Go to Cloud Functions under the navigation menu and click "Create Function"
+
 Under the "Basics" section, select "2nd gen" for your environment, give your function a name and select the same region chosen for the csv's bucket.
+
 For "Trigger Type" choose "Cloud Storage", for "Event Type" select "google.cloud.storage.object.v1.finalized" and then select the bucket containing your csv. Hit "Next".
+
 On the next page - Code - set your "Runtime" to Python 3.8 and "Source code" to "Inline Editor".
+
 You will see two files - main.py and requirement.txt. Fill both with the code in the corresponding files in the folder Cloud_Function_Files, which are set up to point to the pipeline specifications created in the pipeline notebook. Please note you may be prompted to give access to service accounts to allow the function to run.
 
 Feel free to update the components with different preprocessing/model specifications for other projects; as long as downstream code is changed to point to the same places, everything should still run automatically when new data is added!
