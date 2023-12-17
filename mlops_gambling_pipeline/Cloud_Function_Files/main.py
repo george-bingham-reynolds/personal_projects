@@ -5,7 +5,7 @@ from google.cloud import aiplatform
 # BASED ON GOOGLE CLOUD DOCUMENTATION HERE: https://cloud.google.com/vertex-ai/docs/pipelines/trigger-pubsub
 
 # CHANGE FOR OWN PROJECT
-PROJECT_ID = 'ultra-mason-400122'                  
+PROJECT_ID = 'YOUR-PROJECT-ID' #CHANGE TO YOUR PROJECT ID                  
 REGION = 'us-central1'                          
 PIPELINE_ROOT = 'gs://nfl_spreads_model_output_gamma/pipeline_root/' 
 
