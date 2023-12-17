@@ -1,3 +1,5 @@
+#INTRODUCTION#
+
 This repo contains a personal project I put together for a gambling pipeline. It is intended to follow a standard MLOps and ML Engineering framework, fitting into a CI/CD and Continuous Training workflow hosted on Google Cloud. Please note that the core purpose of this project was the building of the infrastructure around the model and not the model itself. The model has not been optimized and is therefore unlikely to be performant; I do not recommend that anyone use it for actual gambling purposes. 
 
 However, the project can be repurposed for different projects in addition to the gambling pipeline - the code it contains should provide a framework for anyone to set up a model that automatically retrains, batch predicts and deploys (or, likelier, one of these two) whenever new data is uploaded in a Google Cloud setting. Preprocessing and modeling would have to be written for the specific task, but the pipeline should be fairly easy to reintegrate with a new modeling project.
@@ -20,6 +22,16 @@ For "Trigger Type" choose "Cloud Storage", for "Event Type" select "google.cloud
 
 On the next page - Code - set your "Runtime" to Python 3.8 and "Source code" to "Inline Editor".
 
-You will see two files - main.py and requirement.txt. Fill both with the code in the corresponding files in the folder Cloud_Function_Files, which are set up to point to the pipeline specifications created in the pipeline notebook. Please note you may be prompted to give access to service accounts to allow the function to run.
+You will see two files - main.py and requirement.txt. Fill both with the code in the corresponding files in the folder Cloud_Function_Files, which are set up to point to the pipeline specifications created in the pipeline notebook. 
+
+Update the "Entry Point" to nfl_spreads_gamma_subscribe (or a renamed function that matches the first function defined) and hit "Deploy."
+
+Please note you may be prompted to give access to service accounts to allow the function to run at points throughout the above steps.
+
+In order to check that the pipeline has run properly (either through the notebook or your Cloud Function), follow these steps:
+
+Go to Vertex AI and then "Pipelines" in Google Cloud to ensure the pipeline runs correctly. If you're specifically checking the cloud function, then make a change to the bucket with your csv first.
+
+After the pipeline runs, go to Google Cloud Storage and enter your output bucket.
 
 Feel free to update the components with different preprocessing/model specifications for other projects; as long as downstream code is changed to point to the same places, everything should still run automatically when new data is added!
