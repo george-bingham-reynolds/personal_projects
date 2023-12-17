@@ -14,7 +14,7 @@ This file is fed into a Kubeflow Pipeline built in the notebook Kubeflow_Pipelin
 
 # AUTOMATION PROCESS #
 
-Lastly, the Cloud_Function_Files folder contains the code that should be used with Google's Cloud Functions. In order to set up the cloud function for automatically updating your model follow these steps:
+Lastly, the Cloud_Function_Files folder contains the code that should be used with Google's Cloud Functions. Note that this only works after you have saved the pipeline's model specifications to cloud storage. In order to set up the cloud function for automatically updating your model follow these steps:
 
 Enable any necessary APIs in a Google Cloud Project 
 
